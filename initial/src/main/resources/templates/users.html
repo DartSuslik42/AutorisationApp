@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Users</title>
+</head>
+<body>
+<div>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                <!-- ??? ?? ?????????? ?????? ???????????? ????? CustomUserDetails.getNickname() -->
+                Welcome <b>[[${#request.userPrincipal.principal.Nickname}]]</b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+    <div>
+        <h1>List of Users</h1>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+            </tr>
+            <tbody>
+            <tr th:each="user: ${listUsers}">
+                <td th:text="${user.id}">Null</td>
+                <td th:text="${user.name}">Null</td>
+                <td th:text="${user.email}">Null</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
