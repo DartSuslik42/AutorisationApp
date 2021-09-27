@@ -28,14 +28,12 @@ public class UserController {
 
     private UserRepository userRepository;
 
-    //TODO: Сделать переадресацию на рукописную страницу авторицзации login.html
-
     @GetMapping("")
     public String viewHomePage(){
         return "index";     // переход к index.html
     }
 
-    @GetMapping("/register")
+    @GetMapping("/authentication/register")
     public String showRegistrationForm(Model model) {
         // Создание формы заполнения полей Class:User
         model.addAttribute("user", new User()); // Нужно для обработки на уровне HTML
@@ -45,7 +43,7 @@ public class UserController {
 
     // TODO: при переходе на index.html высвечивать надпись об успешной регистрации
     // TODO: при некоректно ведённых данных переходить на signup_form.html с объяснением ошибки
-    @PostMapping("/process_register")
+    @PostMapping("/authentication/process_register")
     public String processRegister(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Создаём кодировщик
         String encodedPassword = passwordEncoder.encode(user.getPassword()); // Кодируем пароль пользователя
@@ -53,7 +51,6 @@ public class UserController {
 
         userRepository.save(user); // Сохраняем пользователя в БД
 
-    //  return "register_success"; // переход к register_success.html
         return "index"; // переход к index.html
     }
 
@@ -85,4 +82,8 @@ public class UserController {
         }
     }
 
+    @GetMapping("/authentication/login")
+    public String userLogin(String email, String password){
+        return "login_form";
+    }
 }
