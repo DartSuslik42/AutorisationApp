@@ -1,11 +1,14 @@
-package com.example.securingweb.accessingdatamysql;
+package com.example.securingweb.accessingdatamysql.user;
 
+import com.example.securingweb.accessingdatamysql.role.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor /*  Создаёт конструктор без аргументов.
                        Нужен для создания формы заполнения & получения данных пользователя
@@ -21,7 +24,8 @@ import javax.persistence.*;
       name        "NAME"      - unique, notnull,
       email       "EMAIL"     - unique, notnull,
       password    "PASSWORD"  - notnull
-      userRole    "ROLE"      - default = "UserRole.USER"
+      enabled     "ENABLED"   - default = "false"
+      roles       "ROLES"     - Tables : users <-> users_roles <-> roles (Many to many);
 */
 public class User {
     @Id
@@ -38,9 +42,15 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole = UserRole.USER;
+    //TODO: разобраться с написанным кодом. https://www.codejava.net/frameworks/hibernate/hibernate-many-to-many-association-annotations-example
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     public User(String name, String email, String password) {
         this.name = name;

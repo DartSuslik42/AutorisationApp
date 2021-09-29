@@ -1,4 +1,4 @@
-package com.example.securingweb.accessingdatamysql;
+package com.example.securingweb.accessingdatamysql.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 @AllArgsConstructor /* Конструктор всех полей класса.
                        Добавлен что-бы создать DependencyInjection в поле UserRepository.
@@ -41,8 +40,6 @@ public class UserController {
         return "signup_form";   // переход к signup_form.html
     }
 
-    // TODO: при переходе на index.html высвечивать надпись об успешной регистрации
-    // TODO: при некоректно ведённых данных переходить на signup_form.html с объяснением ошибки
     @PostMapping("/authentication/process_register")
     public String processRegister(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Создаём кодировщик
@@ -85,5 +82,10 @@ public class UserController {
     @GetMapping("/authentication/login")
     public String userLogin(String email, String password){
         return "login_form";
+    }
+
+    @GetMapping("/app")
+    public String appPage() {
+        return "app_page";
     }
 }

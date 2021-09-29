@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>List Users</title>
 </head>
@@ -8,12 +9,22 @@
     <div>
         <form th:action="@{/logout}" method="post">
             <p>
-                <!-- ??? ?? ?????????? ?????? ???????????? ????? CustomUserDetails.getNickname() -->
                 Welcome <b>[[${#request.userPrincipal.principal.Nickname}]]</b>
+            </p>
+            <p>
+                <b>[[${#request.userPrincipal.principal.Authorities}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
         </form>
     </div>
+    <div>
+        <!--
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a th:href="@{'/users/' + ${user.id}}">find</a>
+        </div>
+        -->
+    </div>
+
     <div>
         <h1>List of Users</h1>
     </div>

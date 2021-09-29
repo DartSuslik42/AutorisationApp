@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<div>
+        <form th:action="@{/logout}" method="post">
+            <div>
+                <p>
+                    Welcome <b sec:authentication="principal.Nickname"></b>
+<!--                [[${#request.userPrincipal.principal.Nickname}]]-->
+                </p>
+                <p>
+                    <b sec:authentication="principal.authorities"></b>
+                    <!--[[${#request.userPrincipal.principal.Authorities}]]-->
+                </p>
+            </div>
+            <input type="submit" value="Sign Out" />
+        </form>
+<!-- What is the difference between Roles and Authorities ? -->
+    <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+    <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+
+    </div>
+
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+<!--           <a th:href="@{'/users/' + ${user.id}}">find</a>-->
+           <a th:href="@{/app/users}">UserList</a>
+        </div>
+</div>
+</body>
+</html>
