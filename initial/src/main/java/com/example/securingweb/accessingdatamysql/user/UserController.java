@@ -1,6 +1,9 @@
 package com.example.securingweb.accessingdatamysql.user;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,25 +35,11 @@ public class UserController {
         return "index";     // переход к index.html
     }
 
-    @GetMapping("/authentication/register")
-    public String showRegistrationForm(Model model) {
-        // Создание формы заполнения полей Class:User
-        model.addAttribute("user", new User()); // Нужно для обработки на уровне HTML
-
-        return "signup_form";   // переход к signup_form.html
+    @GetMapping("/app")
+    public String appPage() {
+        return "app_page";
     }
-
-    @PostMapping("/authentication/process_register")
-    public String processRegister(User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Создаём кодировщик
-        String encodedPassword = passwordEncoder.encode(user.getPassword()); // Кодируем пароль пользователя
-        user.setPassword(encodedPassword); // Сохраняем пароль пользователя
-
-        userRepository.save(user); // Сохраняем пользователя в БД
-
-        return "index"; // переход к index.html
-    }
-
+    
     @GetMapping("/app/users")
     public String listUsers(Model model) {
         List<User> listUsers; // Возвращает всё содержимое базы данных
@@ -77,15 +66,5 @@ public class UserController {
             model.addAttribute("listUsers", new ArrayList<>());
             return "users";
         }
-    }
-
-    @GetMapping("/authentication/login")
-    public String userLogin(String email, String password){
-        return "login_form";
-    }
-
-    @GetMapping("/app")
-    public String appPage() {
-        return "app_page";
     }
 }

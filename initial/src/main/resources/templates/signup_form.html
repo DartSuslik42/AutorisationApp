@@ -11,10 +11,10 @@
     <form th:action="@{/authentication/process_register}" th:object="${user}" method="post">
         <div>
             <div>
-                    <input type="text" th:field="*{name}" value placeholder="Name" required minlength="2" maxlength="20"/>
+                    <input type="text" th:field="*{name}" value placeholder="Name" required minlength="2" maxlength="20"/><b th:if="${param.invalid_un}" method = "post"> Username already taken</b>
             </div>
             <div>
-                    <input type="email" th:field="*{email}" required value placeholder="E-Mail"/>
+                    <input type="email" th:field="*{email}" required value placeholder="E-Mail"/><b th:if="${param.invalid_em}" method = "post"> E-Mail already taken</b>
             </div>
             <div>
                     <input type="password" th:field="*{password}" value placeholder="Password" required minlength="6" maxlength="10"/>

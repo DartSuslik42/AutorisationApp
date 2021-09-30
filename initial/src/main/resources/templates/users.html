@@ -9,10 +9,12 @@
     <div>
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome <b>[[${#request.userPrincipal.principal.Nickname}]]</b>
+                Welcome <b sec:authentication="principal.Nickname"></b>
+                <!--                [[${#request.userPrincipal.principal.Nickname}]]-->
             </p>
             <p>
-                <b>[[${#request.userPrincipal.principal.Authorities}]]</b>
+                <b sec:authentication="principal.authorities"></b>
+                <!--[[${#request.userPrincipal.principal.Authorities}]]-->
             </p>
             <input type="submit" value="Sign Out" />
         </form>
