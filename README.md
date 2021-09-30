@@ -20,10 +20,12 @@
 - [x] Сделать переадресацию на рукописную страницу авторизации /login_form
 - [x] Переход на страницу авторизации невозможен для авторизированных прользователей
 - [x] Добавить обработку ошибок в поле регистрации 
-- [ ] Добавить сообщение об успешной регистрации
+- [x] Добавить сообщение об успешной регистрации
 
 # **Полезные ссылки:**
 1. [Setup simple SpringSecurity Application](https://spring.io/guides/gs/securing-web/)
 2. [Basic MySQL-commandline commands](https://dev.mysql.com/doc/mysql-getting-started/en/)
 3. [How to make custom Login/Register Application with connection to MySQL database](https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial)
 4. [How to make custom Login page](https://www.youtube.com/watch?v=yoTohM2jYhs&ab_channel=JavaBrains)
+5. [How to prevent user from going back to login page if already logged in](https://www.codejava.net/frameworks/spring-boot/prevent-user-from-going-back-to-login-page-if-already-logged-in)
+6. [Thymeleaf: if / unless / switch statements](https://habr.com/ru/post/351304/)

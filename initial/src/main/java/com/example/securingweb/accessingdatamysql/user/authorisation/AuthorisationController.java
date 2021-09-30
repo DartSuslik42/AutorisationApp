@@ -63,7 +63,7 @@ public class AuthorisationController {
 
         userRepository.save(user); // Сохраняем пользователя в БД
 
-        return "index"; // переход к index.html
+        return "redirect:/?reg=true"; // Перенаправляет по URL адресу
     }
 
     @GetMapping("/authentication/login")
@@ -74,6 +74,6 @@ public class AuthorisationController {
             return "login_form";
         }
 
-        return "redirect:/app/"; // Перенаправляет по URL адресу
+        return "redirect:/app"; // Перенаправляет по URL адресу
     }
 }

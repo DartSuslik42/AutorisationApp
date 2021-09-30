@@ -7,7 +7,7 @@
 <div>
     <h1>Menu:</h1>
     <h3><a th:href="@{/app}">Main Page</a></h3>
-    <h3><a th:href="@{/authentication/register}">Register</a></h3>
+    <h3><a th:href="@{/authentication/register}" th:unless="${param.reg}">Register</a><a th:if="${param.reg}">Registration Complete !</a></h3>
     <h3><a th:href="@{/authentication/login}">Login</a></h3>
 </div>
 </body>
